@@ -1,0 +1,282 @@
+/* ---------------------------------------------------------------
+   Wort-Institut · Dr. Werner Irro
+   Linksbündiges Layout: dunkle Navigationsleiste trennt Kopfbereich
+   und Inhalt, Überschriften und Text in derselben Größe.
+   --------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/open-sans-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/open-sans-latin-400-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/open-sans-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/open-sans-latin-700-normal.woff2") format("woff2");
+}
+
+:root {
+  --text: #1d1d1b;
+  --text-soft: #5c574f;
+  --text-faint: #8d877d;
+  --accent: #7c2f33;
+  --hairline: #e4e0d8;
+  --paper: #ffffff;
+  --nav-bg: #6e6e6e;
+  --nav-active: #ccc;
+  --sans: "Open Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --measure: 38rem;
+  --inset: clamp(1.25rem, 18vw, 22rem);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  hyphens: auto;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover, a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ----- Kopfbereich -----
+   Größen der Markenzeile (Name/Zeile) sind bewusst in px fixiert und
+   ändern sich auf keinem Breakpoint – feste Wortmarke. */
+
+.masthead {
+  padding: 3.75rem var(--inset) 2.5rem;
+}
+
+.masthead-name {
+  margin: 0;
+  font-size: 26px;
+  line-height: 26px;
+  font-weight: 600;
+}
+.masthead-name a { color: var(--text); }
+.masthead-name a:hover { text-decoration: none; }
+
+.masthead-sub {
+  margin: 0;
+  padding-left: 70px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+/* ----- Navigation ----- */
+
+.nav {
+  background: var(--nav-bg);
+  position: relative;
+}
+
+.nav-toggle { position: absolute; opacity: 0; }
+.nav-toggle-label { display: none; }
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 var(--inset);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-list > li {
+  border-left: 2px solid var(--paper);
+}
+.nav-list > li:first-child {
+  border-left: none;
+}
+
+.nav-list > li > a {
+  display: block;
+  padding: 0 2.2em;
+  color: var(--paper);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.nav-list > li:first-child > a {
+  padding-left: 0;
+}
+
+/* Rollover: keine Hintergrundfläche, nur typografische Hervorhebung
+   (monochrom: Unterstreichung), damit alle Einträge – auch der erste
+   ohne linkes Polster – konsistent wirken. */
+.nav-list > li > a {
+  text-decoration: none;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+.nav-list > li > a:hover,
+.nav-list > li > a:focus-visible,
+.nav-list > li > a[aria-current="page"] {
+  color: var(--nav-active)
+}
+
+/* ----- Inhalt ----- */
+
+.content {
+  min-height: 400px;
+  padding: 3rem var(--inset) 3rem;
+}
+
+.content > * {
+  max-width: var(--measure);
+}
+
+h1, h2, h3 {
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1.8;
+  margin: 0 0 0.2em;
+}
+
+h1 { margin-top: 0; }
+h2, h3 { margin-top: 1.8em; }
+
+p { margin: 0 0 1.1rem; }
+
+.content ul { list-style: none; padding: 0; margin: 0 0 1.1rem; }
+.content li { margin-bottom: 0.2rem; }
+.content li::before { content: "– "; color: var(--text-faint); }
+
+/* Publikationen */
+.pub-list { list-style: none; padding: 0 !important; margin: 1.5rem 0 0; }
+.pub-list li::before { content: none; }
+.pub {
+  display: flex;
+  gap: 1.4rem;
+  align-items: flex-start;
+  border-top: 1px solid var(--hairline);
+  padding: 1.4rem 0;
+  margin: 0;
+}
+.pub-cover {
+  flex-shrink: 0;
+  width: 88px;
+  height: auto;
+  border: 1px solid var(--hairline);
+}
+.pub-cover-placeholder {
+  width: 88px;
+  height: 128px;
+  background: repeating-linear-gradient(45deg, #f6f4ee 0 6px, #fbfaf6 6px 12px);
+}
+.pub-title { margin: 0; font-weight: 700; }
+.pub-subtitle { margin: 0.15rem 0 0; }
+.pub-meta { margin: 0.4rem 0 0; color: var(--text-soft); font-size: 0.92rem; }
+
+/* Vita-Porträt */
+.portrait { margin: 0 0 1.5rem; }
+.portrait img {
+  display: block;
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--hairline);
+}
+
+/* Kontakt */
+.contact-block { margin-top: 0.5rem; }
+.contact-address { margin-bottom: 1.4rem; }
+.contact-details { color: var(--text-soft); }
+
+/* ----- Fußzeile ----- */
+
+.footer {
+  border-top: 1px solid var(--hairline);
+  padding: 1.5rem var(--inset) 2.5rem;
+}
+.footer p { margin: 0; font-size: 0.85rem; color: var(--text-faint); }
+.footer a { color: var(--text-faint); }
+.footer a:hover { color: var(--accent); }
+
+/* ----- Mobil ----- */
+
+@media (max-width: 640px) {
+  :root { --inset: 1.25rem; }
+
+  /* Markenzeile bleibt in fester Größe – nur der Innenabstand engt sich. */
+  .masthead { padding-top: 1.75rem; }
+
+  .nav-toggle-label {
+    display: block;
+    padding: 0.85em var(--inset);
+    color: var(--paper);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .nav-toggle-label::before { content: "☰\00a0\00a0"; }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+  .nav-toggle:checked ~ .nav-list { display: flex; }
+  .nav-toggle:focus-visible ~ .nav-toggle-label { outline: 2px solid var(--paper); outline-offset: -2px; }
+
+  .nav-list > li {
+    border-left: none;
+    border-top: 1px solid var(--nav-active);
+  }
+  .nav-list > li:first-child { border-top: none; }
+
+  .nav-list > li > a {
+    padding: 0.75em var(--inset);
+  }
+  .nav-list > li:first-child > a { padding-left: var(--inset); }
+
+  .pub { gap: 1rem; }
+  .pub-cover, .pub-cover-placeholder { width: 68px; }
+  .pub-cover-placeholder { height: 100px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

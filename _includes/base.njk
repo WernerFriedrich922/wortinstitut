@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title and page.url != "/" %}{{ title }} – {% endif %}Dr. Werner Irro · Wort-Institut</title>
+  {% if description %}<meta name="description" content="{{ description }}">{% endif %}
+  <link rel="preload" href="{{ '/assets/fonts/open-sans-latin-400-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="masthead-name"><a href="{{ '/' | url }}">Dr. Werner Irro</a></p>
+  <p class="masthead-sub">Wort-Institut Hamburg</p>
+</header>
+
+<nav class="nav" aria-label="Hauptnavigation">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+  <label for="nav-toggle" class="nav-toggle-label">Menü</label>
+  <ul class="nav-list">
+    <li><a href="{{ '/lektorat/' | url }}" {% if page.url == '/lektorat/' %}aria-current="page"{% endif %}>Lektorat</a></li>
+    <li><a href="{{ '/autor/' | url }}" {% if page.url == '/autor/' %}aria-current="page"{% endif %}>Autor</a></li>
+    <li><a href="{{ '/vita/' | url }}" {% if page.url == '/vita/' %}aria-current="page"{% endif %}>Vita</a></li>
+    <li><a href="{{ '/kontakt/' | url }}" {% if page.url == '/kontakt/' %}aria-current="page"{% endif %}>Kontakt</a></li>
+  </ul>
+</nav>
+
+<main class="content">
+{{ content | safe }}
+</main>
+
+<footer class="footer">
+  <p>© {% year %} Dr. Werner Irro · <a href="{{ '/impressum/' | url }}">Impressum & Datenschutz</a></p>
+</footer>
+
+</body>
+</html>
