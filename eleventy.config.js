@@ -1,6 +1,6 @@
 import Image from "@11ty/eleventy-img";
 
-const pathPrefix = "/wortinstitut/";
+const pathPrefix = "/";
 
 export default function (eleventyConfig) {
   // Bilder und Stylesheet unverändert in die fertige Website kopieren
